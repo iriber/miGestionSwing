@@ -24,6 +24,7 @@ public class I18n {
     	Properties props = new Properties();
     	try {
 			props.load(I18n.class.getResourceAsStream("/META-INF/i18n/i18n.properties"));
+    		//props.load(I18n.class.getResourceAsStream("i18n.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

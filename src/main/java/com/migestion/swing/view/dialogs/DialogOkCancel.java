@@ -109,6 +109,8 @@ public abstract class DialogOkCancel extends JDialog implements IDialogWithInput
 		infoPanel = panel;
 		
 		initialize();
+		
+		pack();
 	}
 	/*
 	 * se inicializa con un layout manager.
@@ -131,7 +133,7 @@ public abstract class DialogOkCancel extends JDialog implements IDialogWithInput
 		}			
 
 		
-		pack();
+		
 	}
 
 
