@@ -55,9 +55,9 @@ public class JFindObjectPanel extends JPanel implements Serializable, LinkFindOb
         this(null, null);
         propertySupport = new PropertyChangeSupport(this);
     }
-    public Dimension getPreferredSize() {
-        return new Dimension(75, 28);
-    }
+//    public Dimension getPreferredSize() {
+//        return new Dimension(300, 28);
+//    }
     public void addPropertyChangeListener(PropertyChangeListener listener) {
       //  propertySupport.addPropertyChangeListener(listener);
     }
@@ -74,7 +74,7 @@ public class JFindObjectPanel extends JPanel implements Serializable, LinkFindOb
 	 */
 	public JFindObjectPanel(ILinkWindowFindObject windowFindObject, LinkFindObjectListener listener){
 		
-		this(windowFindObject, listener,150);
+		this(windowFindObject, listener,200);
 	}
 	
 	/**
@@ -89,6 +89,7 @@ public class JFindObjectPanel extends JPanel implements Serializable, LinkFindOb
 		this.windowFindObject = windowFindObject;
 		this.listener = listener;
 		this.textWidth = textWidth;
+		this.codeWidth = 70;
 		
 		//seteamos el layout.
 		setLayout(new BorderLayout());
@@ -99,7 +100,7 @@ public class JFindObjectPanel extends JPanel implements Serializable, LinkFindOb
 		txtObjectFound.setEditable(false);
 		input.add(txtObjectFound, BorderLayout.EAST);		
 		
-		txtCodeObjectFound = JTextFieldFactory.getJTextField("",10);
+		txtCodeObjectFound = JTextFieldFactory.getJTextField("",this.codeWidth);
 		txtCodeObjectFound.setEditable(true);
 		txtCodeObjectFound.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -131,7 +132,7 @@ public class JFindObjectPanel extends JPanel implements Serializable, LinkFindOb
 		btnFind.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		this.add(btnFind, BorderLayout.EAST);		
 		
-		this.setPreferredSize(new Dimension(textWidth+40,28));
+		this.setPreferredSize(new Dimension(textWidth+codeWidth+25,28));
 	}
 	/*
 	 *  (non-Javadoc)

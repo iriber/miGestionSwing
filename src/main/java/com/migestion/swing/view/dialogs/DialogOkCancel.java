@@ -100,6 +100,7 @@ public abstract class DialogOkCancel extends JDialog implements IDialogWithInput
 				initializeWithoutLayout();
 			}else{
 				initializeWithLayout();
+				pack();
 			}
 		}
 	}
@@ -110,7 +111,7 @@ public abstract class DialogOkCancel extends JDialog implements IDialogWithInput
 		
 		initialize();
 		
-		pack();
+		
 	}
 	/*
 	 * se inicializa con un layout manager.

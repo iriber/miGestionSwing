@@ -984,6 +984,7 @@ public class GenericInternalFrameList extends JInternalFrame implements TableMod
 	 */
 	public void objectUpdated(Object objectUpdated) {
 		refreshTable();		
+		
 	}
 	
 	/**
@@ -1056,6 +1057,8 @@ public class GenericInternalFrameList extends JInternalFrame implements TableMod
 	//refresca el listado.
 	public void refreshTable(){
 		
+		int selectedRow = elementsTable.getSelectedRow();
+		
 		try {
 			//seteamos los elementos de la tabla.
 			setElements();			
@@ -1063,6 +1066,13 @@ public class GenericInternalFrameList extends JInternalFrame implements TableMod
 			//se informa del error al usuario.
 			DialogMessage.showErrorMessage(getTitle(), e.getMessage());			
 		}
+		elementsTable.repaint();
+				
+		if( selectedRow >= 0 && elementsTable.getRowCount()>selectedRow){
+			elementsTable.getSelectionModel().setSelectionInterval(selectedRow, selectedRow);
+		}
+		
+		
 	}	
 
 	@Deprecated
@@ -1092,6 +1102,9 @@ public class GenericInternalFrameList extends JInternalFrame implements TableMod
 			//this.elementTableModel =  this.controller.list();
 			//this.elementTableModel.setDescription( this.getTitle() );
 		}
+		
+		
+		
 		
 		this.elementTableModel.setElements(items);
 		totalSize = items.getTotalSize();

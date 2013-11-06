@@ -28,7 +28,7 @@ import com.migestion.swing.view.exceptions.ViewException;
  * @author bernardo
  *
  */
-public class CRUDFrame extends GenericInternalFrameList implements IContextListener{
+public class CRUDFrame extends GenericInternalFrameList {
 
 	
 	private ICRUDFrame icrudFrame;

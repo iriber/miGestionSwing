@@ -13,7 +13,7 @@ public class ContextObserver<T> implements IContextListener<T>{
 	/**
 	 * listeners del contexto
 	 */
-	private Vector<IContextListener<T>> listeners;
+	protected Vector<IContextListener<T>> listeners;
 	
 	public ContextObserver(){
 		listeners = new Vector<IContextListener<T>>();
