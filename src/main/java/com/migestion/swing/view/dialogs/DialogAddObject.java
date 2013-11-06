@@ -5,6 +5,7 @@ import java.awt.Container;
 import com.migestion.swing.controller.IControllerAdd;
 import com.migestion.swing.controller.exception.ControllerException;
 import com.migestion.swing.navigation.interfaces.ILinkWindowAdd;
+import com.migestion.swing.navigation.interfaces.ILinkWindowOpen;
 import com.migestion.swing.utils.UbicacionVentana;
 import com.migestion.swing.view.exceptions.ViewException;
 
@@ -17,7 +18,7 @@ import com.migestion.swing.view.exceptions.ViewException;
  * @author Bernardo Iribarne
  *
  */
-public abstract class DialogAddObject extends DialogOkCancel implements ILinkWindowAdd {
+public abstract class DialogAddObject extends DialogOkCancel implements ILinkWindowAdd, ILinkWindowOpen {
 
 	/**
 	 * controlador que se encargará de agregar al modelo el objeto creado al modelo

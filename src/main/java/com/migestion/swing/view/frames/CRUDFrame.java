@@ -7,19 +7,20 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import com.migestion.swing.context.IContextListener;
 import com.migestion.swing.controller.IControllerList;
 import com.migestion.swing.i18n.buttons.ButtonImagesBundle;
 import com.migestion.swing.i18n.buttons.ButtonLabelsBundle;
 import com.migestion.swing.search.criteria.UICriteria;
 import com.migestion.swing.swingx.custom.StackedBox;
 import com.migestion.swing.view.dialogs.DialogMessage;
+import com.migestion.swing.view.dialogs.ICriteriaPanel;
 import com.migestion.swing.view.exceptions.ViewException;
 
 /**
@@ -28,27 +29,58 @@ import com.migestion.swing.view.exceptions.ViewException;
  * @author bernardo
  *
  */
-public class CRUDFrame extends GenericInternalFrameList {
+public abstract class CRUDFrame extends GenericInternalFrameList{
 
+	protected ICriteriaPanel uiCriteriaPanel;
 	
-	private ICRUDFrame icrudFrame;
-
+	/**
+	 * panel para el criterio de búsqueda.
+	 * @return
+	 */
+	public abstract ICriteriaPanel buildUICriteriaPanel();
+	
+	/**
+	 * setea los links que utilizará la ventana.
+	 * @param frame
+	 */
+	public abstract void initLinks();
 	
 
-	public CRUDFrame(String title, IControllerList controller, ICRUDFrame icrudFrame) {
+	/**
+	 * título para el menú.
+	 * @return
+	 */
+	public abstract String getMenuTitle();
+
+	/**
+	 * ícono para la ventana.
+	 * @return
+	 */
+	public abstract URL getIcon();
+
+	/**
+	 * footer de la ventana.
+	 * @return
+	 */
+	public abstract JComponent getFooter(); 
+	
+
+	public CRUDFrame(String title, IControllerList controller) {
 	
 		super( title );
 		
-		this.icrudFrame = icrudFrame;
-
+		//this.icrudFrame = icrudFrame;
+		uiCriteriaPanel = buildUICriteriaPanel();
+		
 		init(title, controller);
 		
-		menuDefault.setText( icrudFrame.getMenuTitle() );
+		menuDefault.setText( getMenuTitle() );
 		
 		//inicializamos los links.
-		icrudFrame.setLinks( this );
+		initLinks( );
 		
-		setFrameIcon( new ImageIcon( icrudFrame.getIcon() ) );
+		setFrameIcon( new ImageIcon( getIcon() ) );
+		
 		
 		
 	}
@@ -60,7 +92,7 @@ public class CRUDFrame extends GenericInternalFrameList {
 		// criteria de búsqueda.
 		
 		JPanel buscar = new JPanel();
-		Container criteriaPanel = icrudFrame.getUICriteriaPanel().getPanel();
+		Container criteriaPanel = uiCriteriaPanel.getPanel();
 		buscar.setLayout(new FlowLayout());
 		buscar.add( criteriaPanel  );
 		buscar.setPreferredSize( criteriaPanel.getPreferredSize() );
@@ -103,7 +135,7 @@ public class CRUDFrame extends GenericInternalFrameList {
 	private void doFind() {
 		try {
 			//criteriaCreated( icrudFrame.getUICriteria());
-			criteriaCreated( icrudFrame.getUICriteriaPanel().getCriteria() );
+			criteriaCreated( uiCriteriaPanel.getCriteria() );
 		} catch (ViewException e) {
 			DialogMessage.showInformationMessage( getTitle(), e.getMessage());
 		}		
@@ -114,21 +146,12 @@ public class CRUDFrame extends GenericInternalFrameList {
 		doFind();
 	}	
 	
-	/**
-	 * retorna el panel de footer.
-	 */
-	public JComponent getFooter(){			
-		/*JLabel lblFooter = new JLabel(""  );
-		lblFooter.setFont(new Font("Arial",1,11));
-		lblFooter.setHorizontalAlignment(SwingConstants.RIGHT);		
-		return lblFooter;*/
-		return icrudFrame.getFooter();
-	}
+	
 
 
 
 	public void setUICriteria(UICriteria criteria) {
-		icrudFrame.getUICriteriaPanel().setCriteria(criteria);
+		uiCriteriaPanel.setCriteria(criteria);
 		doFind();
 	}
 

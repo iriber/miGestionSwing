@@ -7,6 +7,7 @@ import java.util.List;
 import com.migestion.swing.controller.IControllerAdd;
 import com.migestion.swing.view.dialogs.DialogAddObject;
 import com.migestion.swing.view.exceptions.ViewException;
+import com.migestion.swing.view.frames.JFrameContainer;
 import com.migestion.swing.view.inputs.InputRequiredValidator;
 import com.migestion.swing.view.inputs.InputValidator;
 
@@ -71,5 +72,10 @@ public class DialogAddAdapter extends DialogAddObject{
 		for (InputValidator validator : panel.getValidators()) {
 			validator.clean();
 		}
+	}
+
+
+	public void addToJFrameContainer(JFrameContainer container) {
+		//TODO
 	}
 }
