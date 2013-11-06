@@ -21,10 +21,12 @@ public class ProgressDialog extends JDialog {
     private JLabel subMessage;
     private JProgressBar progressBar;
 
-    public ProgressDialog(Component parent, SwingWorker worker, String strMessage, String strSubmessage) {
+    public ProgressDialog(Component parent, SwingWorker worker, String strTitle, String strMessage, String strSubmessage) {
 
         super(parent == null ? null : SwingUtilities.getWindowAncestor(parent));
         setModal(true);
+        
+        setTitle(strTitle);
 
         ((JComponent)getContentPane()).setBorder(new EmptyBorder(8, 8, 8, 8));
 
@@ -73,9 +75,9 @@ public class ProgressDialog extends JDialog {
 
     }
 
-    public static void showProgress(Component parent, SwingWorker worker, String message, String submessage) {
+    public static void showProgress(Component parent, SwingWorker worker, String title,String message, String submessage) {
 
-        ProgressDialog dialog = new ProgressDialog(parent, worker, message, submessage);
+        ProgressDialog dialog = new ProgressDialog(parent, worker, title, message, submessage);
         dialog.setLocationRelativeTo(parent);
         dialog.setVisible(true);
 
