@@ -24,7 +24,7 @@ public class ContextObserver<T> implements IContextListener<T>{
 		listeners.add( listener );
 	}
 	
-	public void objectDeleted(Object objectDeleted) {
+	public void objectDeleted(T objectDeleted) {
 		
 		for (IContextListener<T> listener : listeners) {
 			listener.objectDeleted(objectDeleted);
@@ -32,7 +32,7 @@ public class ContextObserver<T> implements IContextListener<T>{
 		
 	}
 
-	public void objectUpdated(Object objectUpdated) {
+	public void objectUpdated(T objectUpdated) {
 		
 		for (IContextListener<T> listener : listeners) {
 			listener.objectUpdated(objectUpdated);
@@ -40,7 +40,7 @@ public class ContextObserver<T> implements IContextListener<T>{
 		
 	}
 
-	public void objectCreated(Object objectCreated) {
+	public void objectCreated(T objectCreated) {
 		for (IContextListener<T> listener : listeners) {
 			listener.objectCreated(objectCreated);
 		}

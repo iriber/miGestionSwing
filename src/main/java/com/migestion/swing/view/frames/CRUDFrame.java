@@ -29,7 +29,7 @@ import com.migestion.swing.view.exceptions.ViewException;
  * @author bernardo
  *
  */
-public abstract class CRUDFrame extends GenericInternalFrameList{
+public abstract class CRUDFrame<T> extends GenericInternalFrameList<T>{
 
 	protected ICriteriaPanel uiCriteriaPanel;
 	

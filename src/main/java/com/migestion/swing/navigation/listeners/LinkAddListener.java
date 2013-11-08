@@ -7,7 +7,7 @@ package com.migestion.swing.navigation.listeners;
  * @author Bernardo Iribarne
  *
  */
-public interface LinkAddListener {
+public interface LinkAddListener<T> {
 
 	/**
 	 * cuando se cree un nuevo objeto el listener ser�
@@ -15,5 +15,5 @@ public interface LinkAddListener {
 	 * 
 	 * @param objectCreated
 	 */
-	public void objectCreated(Object objectCreated);
+	public void objectCreated(T objectCreated);
 }

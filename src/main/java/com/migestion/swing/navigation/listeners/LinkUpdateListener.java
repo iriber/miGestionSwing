@@ -7,7 +7,7 @@ package com.migestion.swing.navigation.listeners;
  * @author Bernardo Iribarne
  *
  */
-public interface LinkUpdateListener {
+public interface LinkUpdateListener<T> {
 
 	/**
 	 * cuando se modifique el objeto el listener ser�
@@ -15,5 +15,5 @@ public interface LinkUpdateListener {
 	 * 
 	 * @param objectCreated
 	 */
-	public void objectUpdated(Object objectUpdated);
+	public void objectUpdated(T objectUpdated);
 }

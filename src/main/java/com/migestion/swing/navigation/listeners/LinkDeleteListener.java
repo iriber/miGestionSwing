@@ -7,12 +7,12 @@ package com.migestion.swing.navigation.listeners;
  * @author Bernardo Iribarne
  *
  */
-public interface LinkDeleteListener {
+public interface LinkDeleteListener<T> {
 
 	/**
 	 * cuando se elimina el objeto el listener ser�
 	 * avisado.
 	 * 
 	 */
-	public void objectDeleted(Object objectDeleted);
+	public void objectDeleted(T objectDeleted);
 }

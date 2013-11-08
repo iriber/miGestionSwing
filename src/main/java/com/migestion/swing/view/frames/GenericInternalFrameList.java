@@ -86,11 +86,11 @@ import com.migestion.swing.view.renderers.ElementTableRenderer;
  * @author Bernardo Iribarne {Ostrich}
  * @version 1.0
  */
-public class GenericInternalFrameList extends JInternalFrame implements TableModelListener,
+public class GenericInternalFrameList<T> extends JInternalFrame implements TableModelListener,
 																		ListSelectionListener, 
-																		LinkAddListener, 
-																		LinkUpdateListener,
-																		LinkDeleteListener, 
+																		LinkAddListener<T>, 
+																		LinkUpdateListener<T>,
+																		LinkDeleteListener<T>, 
 																		LinkCreateCriteriaListener, 
 																		ILinkWindowClose,
 																		ILinkWindowList, 
@@ -184,7 +184,7 @@ public class GenericInternalFrameList extends JInternalFrame implements TableMod
 	public GenericInternalFrameList( String title ) {
 		super(title, true, false, true, true);
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -192,7 +192,7 @@ public class GenericInternalFrameList extends JInternalFrame implements TableMod
 		
 		this.setFrameIcon(new ImageIcon(LinkImagesBundle.link_List));
 		this.controller = controller;
-		this.rowCount = 10;
+		this.rowCount = 20;
 		//creamos la UI
 		createUI();
 		
@@ -213,7 +213,7 @@ public class GenericInternalFrameList extends JInternalFrame implements TableMod
 		this.setFrameIcon(new ImageIcon(LinkImagesBundle.link_List));
 		this.controller = controller;
 		this.elementTableModel = initCollection;
-		this.rowCount = 10;
+		this.rowCount = 20;
 		//creamos la UI
 		createUI();
 	}
@@ -977,7 +977,7 @@ public class GenericInternalFrameList extends JInternalFrame implements TableMod
 	 * este m�todo se ejecutar� cuando el linkAdd avise
 	 * que un objeto fue creado.
 	 */
-	public void objectCreated(Object objectCreated) {
+	public void objectCreated(T objectCreated) {
 		refreshTable();		
 	}
 
@@ -985,7 +985,7 @@ public class GenericInternalFrameList extends JInternalFrame implements TableMod
 	 * este m�todo se ejecutar� cuando el linkUpdate avise
 	 * que el objeto fue eliminado.
 	 */
-	public void objectUpdated(Object objectUpdated) {
+	public void objectUpdated(T objectUpdated) {
 		refreshTable();		
 		
 	}
@@ -994,7 +994,7 @@ public class GenericInternalFrameList extends JInternalFrame implements TableMod
 	 * este m�todo se ejecutar� cuando el linkDelete avise
 	 * que el objeto fue eliminado.
 	 */
-	public void objectDeleted(Object object) {
+	public void objectDeleted(T object) {
 		refreshTable();
 	}
 
@@ -1321,11 +1321,11 @@ public class GenericInternalFrameList extends JInternalFrame implements TableMod
 	 * en el listado (m�ximo de 50 filas).
 	 */
 	private void addRow(){
-		if(rowCount<50){
+		//if(rowCount<50){
 			rowCount += 1;
 			labelRows.setText(String.valueOf(rowCount));
 			first();
-		}
+		//}
 	}
 
 	/*
