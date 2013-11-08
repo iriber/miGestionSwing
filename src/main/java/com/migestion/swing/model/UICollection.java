@@ -16,6 +16,7 @@ import javax.swing.table.TableRowSorter;
 import com.migestion.swing.view.editors.IntegerEditor;
 import com.migestion.swing.view.editors.NumberEditor;
 import com.migestion.swing.view.renderers.ElementTableRenderer;
+import com.migestion.swing.view.renderers.EntityTableRenderer;
 import com.migestion.swing.view.renderers.TableHeaderRenderer;
 
 
@@ -324,7 +325,7 @@ public abstract class UICollection implements TableModel, IModelToPrint{
      * @return
      */
     public TableCellRenderer getTableCellRenderer(){
-    	return new ElementTableRenderer();
+    	return new EntityTableRenderer();
     }
 
     /**
