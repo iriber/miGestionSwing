@@ -1,5 +1,8 @@
 package com.migestion.swing.view.inputs;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
+
 import javax.swing.JComponent;
 
 /**
@@ -21,9 +24,19 @@ public class InputFloatValidator extends InputValidator{
 		Boolean ok = Boolean.TRUE;
 		
 		try {
-			Float.parseFloat( (String)object );
+			
+			DecimalFormat format = new java.text.DecimalFormat("#0.00");
+			format.parse((String)object);
+			
+			//Float.parseFloat( (String)object );
+			
+			
 			ok = Boolean.TRUE;
-		} catch (NumberFormatException nfe){
+			
+//		} catch (NumberFormatException nfe){
+//			ok = Boolean.FALSE;
+			
+		} catch (ParseException e) {
 			ok = Boolean.FALSE;
 		}
 		

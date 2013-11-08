@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 
 import com.migestion.swing.controller.IControllerUpdate;
 import com.migestion.swing.controller.exception.ControllerException;
+import com.migestion.swing.navigation.interfaces.ILinkWindowObjectOpen;
 import com.migestion.swing.navigation.interfaces.ILinkWindowUpdate;
 import com.migestion.swing.view.exceptions.ViewException;
 
@@ -18,7 +19,7 @@ import com.migestion.swing.view.exceptions.ViewException;
  * @author Bernardo Iribarne
  * 
  */
-public abstract class DialogUpdateObject extends DialogOkCancel implements ILinkWindowUpdate{
+public abstract class DialogUpdateObject extends DialogOkCancel implements ILinkWindowUpdate, ILinkWindowObjectOpen{
 
 	//controlador que se encargar� de modificar el objeto
 	private IControllerUpdate controller; 

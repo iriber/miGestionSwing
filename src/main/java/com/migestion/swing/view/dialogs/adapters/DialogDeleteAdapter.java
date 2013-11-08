@@ -8,6 +8,7 @@ import com.migestion.swing.controller.IControllerDelete;
 import com.migestion.swing.controller.IControllerView;
 import com.migestion.swing.view.dialogs.DialogDeleteObject;
 import com.migestion.swing.view.dialogs.DialogViewObject;
+import com.migestion.swing.view.frames.JFrameContainer;
 
 /**
  * Diálogo para visualizar objetos
@@ -40,5 +41,10 @@ public class DialogDeleteAdapter extends DialogDeleteObject{
 	@Override
 	protected void showObjectToDelete() {
 		panel.showObject( this.objectToDelete );
+	}
+
+	public void addToJFrameContainer(JFrameContainer container) {
+		// TODO Auto-generated method stub
+		
 	}
 }

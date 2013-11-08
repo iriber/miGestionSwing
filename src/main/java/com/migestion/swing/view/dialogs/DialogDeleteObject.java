@@ -5,6 +5,7 @@ import java.awt.Container;
 import com.migestion.swing.controller.IControllerDelete;
 import com.migestion.swing.controller.exception.ControllerException;
 import com.migestion.swing.navigation.interfaces.ILinkWindowDelete;
+import com.migestion.swing.navigation.interfaces.ILinkWindowObjectOpen;
 
 /**
  * Di�logo que ser� utilizado como base para eliminar un objeto.
@@ -15,7 +16,7 @@ import com.migestion.swing.navigation.interfaces.ILinkWindowDelete;
  * @author Bernardo Iribarne
  * 
  */
-public abstract class DialogDeleteObject extends DialogOkCancel implements ILinkWindowDelete{
+public abstract class DialogDeleteObject extends DialogOkCancel implements ILinkWindowDelete, ILinkWindowObjectOpen{
 
 	//controlador que se encargar� de eliminar del 
 	//modelo el objeto indicado

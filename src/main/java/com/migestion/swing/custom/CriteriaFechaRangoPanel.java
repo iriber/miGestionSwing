@@ -30,7 +30,6 @@ public class CriteriaFechaRangoPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup = new javax.swing.ButtonGroup();
         rdbtnRango = new javax.swing.JRadioButton();
@@ -39,45 +38,63 @@ public class CriteriaFechaRangoPanel extends javax.swing.JPanel {
         rdBtnSemanaActual = new javax.swing.JRadioButton();
         rdBtnMesActual = new javax.swing.JRadioButton();
         rdBtnAnioActual = new javax.swing.JRadioButton();
-
-        setLayout(new java.awt.GridBagLayout());
+        rdBtnHoy = new javax.swing.JRadioButton();
 
         buttonGroup.add(rdbtnRango);
         rdbtnRango.setText("Rango");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        add(rdbtnRango, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        add(pickerDesde, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        add(pickerHasta, gridBagConstraints);
 
         buttonGroup.add(rdBtnSemanaActual);
-        rdBtnSemanaActual.setSelected(true);
         rdBtnSemanaActual.setText("Esta semana");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        add(rdBtnSemanaActual, gridBagConstraints);
 
         buttonGroup.add(rdBtnMesActual);
         rdBtnMesActual.setText("Este mes");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        add(rdBtnMesActual, gridBagConstraints);
 
         buttonGroup.add(rdBtnAnioActual);
-        rdBtnAnioActual.setText("Este Anio");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        add(rdBtnAnioActual, gridBagConstraints);
+        rdBtnAnioActual.setText("Este Año");
+
+        buttonGroup.add(rdBtnHoy);
+        rdBtnHoy.setSelected(true);
+        rdBtnHoy.setText("Hoy");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rdBtnHoy)
+                    .addComponent(rdbtnRango))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(rdBtnSemanaActual)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rdBtnMesActual)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rdBtnAnioActual))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pickerDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pickerHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rdBtnHoy)
+                    .addComponent(rdBtnSemanaActual)
+                    .addComponent(rdBtnMesActual)
+                    .addComponent(rdBtnAnioActual))
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pickerHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pickerDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rdbtnRango))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -86,6 +103,7 @@ public class CriteriaFechaRangoPanel extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser pickerDesde;
     private com.toedter.calendar.JDateChooser pickerHasta;
     private javax.swing.JRadioButton rdBtnAnioActual;
+    private javax.swing.JRadioButton rdBtnHoy;
     private javax.swing.JRadioButton rdBtnMesActual;
     private javax.swing.JRadioButton rdBtnSemanaActual;
     private javax.swing.JRadioButton rdbtnRango;
@@ -126,7 +144,20 @@ public class CriteriaFechaRangoPanel extends javax.swing.JPanel {
 				
 		Calendar calendar1 = Calendar.getInstance();
 		Calendar calendar2 = Calendar.getInstance();
-			
+
+		if(rdBtnHoy.isSelected()){
+                    calendar1.set(Calendar.MINUTE, 0);
+                    calendar1.set(Calendar.HOUR, 0);
+                    calendar1.set(Calendar.SECOND, 0);
+                    calendar1.set(Calendar.AM_PM, Calendar.AM);
+
+                    calendar2.set(Calendar.MINUTE, 59);
+                    calendar2.set(Calendar.HOUR, 11);
+                    calendar2.set(Calendar.SECOND, 59);
+                    calendar2.set(Calendar.AM_PM, Calendar.PM);                   
+                    
+		}
+                
 		if(rdBtnSemanaActual.isSelected()){
 			calendar1.set( Calendar.DAY_OF_WEEK, 1);
 			calendar2.set( Calendar.DAY_OF_WEEK, calendar2.getActualMaximum(Calendar.DAY_OF_WEEK));

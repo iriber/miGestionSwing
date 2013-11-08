@@ -6,6 +6,7 @@ import java.util.List;
 import com.migestion.swing.controller.IControllerUpdate;
 import com.migestion.swing.view.dialogs.DialogUpdateObject;
 import com.migestion.swing.view.exceptions.ViewException;
+import com.migestion.swing.view.frames.JFrameContainer;
 import com.migestion.swing.view.inputs.InputValidator;
 
 /**
@@ -68,5 +69,10 @@ public class DialogUpdateAdapter extends DialogUpdateObject{
 
 		panel.showObject( this.getObjectUpdated() );
 
+	}
+	
+	public void addToJFrameContainer(JFrameContainer container) {
+		// TODO Auto-generated method stub
+		
 	}
 }

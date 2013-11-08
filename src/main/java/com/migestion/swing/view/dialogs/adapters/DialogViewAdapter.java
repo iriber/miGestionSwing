@@ -4,6 +4,7 @@ import java.awt.Container;
 
 import com.migestion.swing.controller.IControllerView;
 import com.migestion.swing.view.dialogs.DialogViewObject;
+import com.migestion.swing.view.frames.JFrameContainer;
 
 /**
  * Diálogo para visualizar objetos
@@ -37,4 +38,8 @@ public class DialogViewAdapter extends DialogViewObject{
 			return null;
 	}
 
+	public void addToJFrameContainer(JFrameContainer container) {
+		// TODO Auto-generated method stub
+		
+	}
 }

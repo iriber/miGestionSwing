@@ -15,6 +15,7 @@ import com.migestion.swing.controller.IControllerView;
 import com.migestion.swing.controller.exception.ControllerException;
 import com.migestion.swing.i18n.buttons.ButtonImagesBundle;
 import com.migestion.swing.i18n.buttons.ButtonLabelsBundle;
+import com.migestion.swing.navigation.interfaces.ILinkWindowObjectOpen;
 import com.migestion.swing.navigation.interfaces.ILinkWindowView;
 import com.migestion.swing.utils.UbicacionVentana;
 
@@ -27,7 +28,7 @@ import com.migestion.swing.utils.UbicacionVentana;
  * @author Bernardo Iribarne {Ostrich}
  *
  */
-public abstract class DialogViewObject extends DialogOkCancel implements ILinkWindowView{
+public abstract class DialogViewObject extends DialogOkCancel implements ILinkWindowView, ILinkWindowObjectOpen{
 
 	//controlador que se encargar� de agregar al 
 	//modelo el objeto creado al modelo

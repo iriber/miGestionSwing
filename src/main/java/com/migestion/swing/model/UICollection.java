@@ -1,6 +1,5 @@
 package com.migestion.swing.model;
 
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -14,8 +13,8 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import com.migestion.swing.view.editors.FloatEditor;
 import com.migestion.swing.view.editors.IntegerEditor;
+import com.migestion.swing.view.editors.NumberEditor;
 import com.migestion.swing.view.renderers.ElementTableRenderer;
 import com.migestion.swing.view.renderers.TableHeaderRenderer;
 
@@ -437,8 +436,8 @@ public abstract class UICollection implements TableModel, IModelToPrint{
 	
 	public void initCellEditorsRenderers(JTable table){
 		
-		table.setDefaultEditor( Integer.class,  new IntegerEditor(0, null));
-		table.setDefaultEditor( Float.class,  new FloatEditor(0,null, new DecimalFormat("#,###,###,##0.00")));
+		table.setDefaultEditor( Integer.class,  new IntegerEditor(false));
+		table.setDefaultEditor( Float.class,  new NumberEditor(false));
 	}
 	
 	public void initColumnsWidth(JTable table){

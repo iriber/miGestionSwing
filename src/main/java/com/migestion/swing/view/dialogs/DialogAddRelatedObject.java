@@ -2,6 +2,8 @@ package com.migestion.swing.view.dialogs;
 
 import com.migestion.swing.controller.IControllerAdd;
 import com.migestion.swing.navigation.interfaces.ILinkWindowAddRelated;
+import com.migestion.swing.navigation.interfaces.ILinkWindowObjectOpen;
+import com.migestion.swing.navigation.interfaces.ILinkWindowOpen;
 import com.migestion.swing.utils.UbicacionVentana;
 
 /**
@@ -13,7 +15,7 @@ import com.migestion.swing.utils.UbicacionVentana;
  * @author Bernardo Iribarne
  *
  */
-public abstract class DialogAddRelatedObject extends DialogAddObject implements ILinkWindowAddRelated{
+public abstract class DialogAddRelatedObject extends DialogAddObject implements ILinkWindowAddRelated, ILinkWindowObjectOpen{
 
 
 	//objeto relacionado al objecto a crear
