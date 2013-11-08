@@ -65,6 +65,9 @@ public class EntityTableRenderer implements TableCellRenderer {
 		entityLbl.setFont(getFont(table, value, isSelected, hasFocus, row,
 				column, entity));
 
+		
+		
+		
 		if (isSelected) {
 			entityLbl.setBackground(getBackgroundSelected());
 			entityLbl.setForeground(getForegroundSelected());
@@ -76,7 +79,13 @@ public class EntityTableRenderer implements TableCellRenderer {
 		}
 
 		// entityLbl.setHorizontalTextPosition(SwingConstants.RIGHT);
-		entityLbl.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		if (isSelected  && table.getSelectedColumn()==column ){
+			entityLbl.setBorder(BorderFactory.createLineBorder(Color.BLACK,2));
+		}else{
+			entityLbl.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));	
+		}
+		
+		
 
 		UICollection model = (UICollection) table.getModel();
 
