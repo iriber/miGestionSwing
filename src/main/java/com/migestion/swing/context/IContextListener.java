@@ -10,7 +10,7 @@ import com.migestion.swing.navigation.listeners.LinkUpdateListener;
  * @author bernardo
  *
  */
-public interface IContextListener<T> extends LinkAddListener, LinkDeleteListener, LinkUpdateListener{
+public interface IContextListener<T> extends LinkAddListener<T>, LinkDeleteListener<T>, LinkUpdateListener<T>{
 
 	
 }
