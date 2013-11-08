@@ -29,6 +29,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
@@ -37,6 +38,8 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+
+import org.jdesktop.swingx.calendar.DateSelectionModel.SelectionMode;
 
 import com.migestion.swing.controller.IControllerList;
 import com.migestion.swing.controller.exception.ControllerException;
