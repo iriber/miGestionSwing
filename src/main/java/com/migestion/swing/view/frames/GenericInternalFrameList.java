@@ -978,6 +978,7 @@ public class GenericInternalFrameList<T> extends JInternalFrame implements Table
 	 * que un objeto fue creado.
 	 */
 	public void objectCreated(T objectCreated) {
+		
 		refreshTable();		
 	}
 
@@ -1060,19 +1061,24 @@ public class GenericInternalFrameList<T> extends JInternalFrame implements Table
 	//refresca el listado.
 	public void refreshTable(){
 		
-		int selectedRow = elementsTable.getSelectedRow();
-		
-		try {
-			//seteamos los elementos de la tabla.
-			setElements();			
-		} catch (ControllerException e) {
-			//se informa del error al usuario.
-			DialogMessage.showErrorMessage(getTitle(), e.getMessage());			
-		}
-		elementsTable.repaint();
-				
-		if( selectedRow >= 0 && elementsTable.getRowCount()>selectedRow){
-			elementsTable.getSelectionModel().setSelectionInterval(selectedRow, selectedRow);
+		if( isVisible() ){
+			
+			int selectedRow = elementsTable.getSelectedRow();
+			
+			try {
+				//seteamos los elementos de la tabla.
+				setElements();			
+			} catch (ControllerException e) {
+				//se informa del error al usuario.
+				DialogMessage.showErrorMessage(getTitle(), e.getMessage());			
+			}
+			elementsTable.repaint();
+					
+			if( selectedRow >= 0 && elementsTable.getRowCount()>selectedRow){
+				elementsTable.getSelectionModel().setSelectionInterval(selectedRow, selectedRow);
+			}
+			
+			
 		}
 		
 		

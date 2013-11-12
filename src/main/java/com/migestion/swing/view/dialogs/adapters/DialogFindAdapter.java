@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 
 import com.migestion.swing.controller.IControllerList;
 import com.migestion.swing.model.UICollection;
+import com.migestion.swing.navigation.LinkOpenDialog;
 import com.migestion.swing.search.criteria.UICriteria;
 import com.migestion.swing.view.dialogs.DialogFindObject;
 import com.migestion.swing.view.dialogs.ICriteriaPanel;
@@ -24,6 +25,7 @@ public class DialogFindAdapter extends DialogFindObject{
 	ICriteriaPanel panel;
 	IControllerList controller;
 	UICollection defaultCollection;	
+	LinkOpenDialog linkAdd;
 	
 	//-----------------
 	// CONSTRUCTORES
@@ -35,15 +37,22 @@ public class DialogFindAdapter extends DialogFindObject{
 		this.panel = panel;
 		this.controller = controller;
 		this.defaultCollection = defaultCollection;
+		this.linkAdd = null;
 	}
 	
-	
-	//--------------------
-	//M�TODOS PROTECTED
-	//--------------------	
-
+	public DialogFindAdapter(String title, ICriteriaPanel panel, IControllerList controller, UICollection defaultCollection, LinkOpenDialog linkAdd) {
+		super(title);
+		
+		this.panel = panel;
+		this.controller = controller;
+		this.defaultCollection = defaultCollection;
+		this.linkAdd = linkAdd;
+		
+		
+	}	
 
 	/*
+	 * 
 	 * (non-Javadoc)
 	 * @see com.codnet.swing.view.dialogs.DialogFindObject#getCriteriaFromUI()
 	 */
@@ -97,6 +106,14 @@ public class DialogFindAdapter extends DialogFindObject{
 	 */
 	protected UICollection getUICollectionDefault() {
 		return defaultCollection;
+	}
+
+	public LinkOpenDialog getLinkAdd() {
+		return linkAdd;
+	}
+
+	public void setLinkAdd(LinkOpenDialog linkAdd) {
+		this.linkAdd = linkAdd;
 	}
 
 

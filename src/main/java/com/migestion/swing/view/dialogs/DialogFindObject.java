@@ -2,20 +2,26 @@ package com.migestion.swing.view.dialogs;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.util.Vector;
 
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
@@ -25,12 +31,15 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
+import com.migestion.swing.context.IContextListener;
 import com.migestion.swing.controller.IControllerList;
 import com.migestion.swing.controller.exception.ControllerException;
 import com.migestion.swing.factories.JLabelFactory;
 import com.migestion.swing.i18n.buttons.ButtonImagesBundle;
 import com.migestion.swing.i18n.buttons.ButtonLabelsBundle;
 import com.migestion.swing.model.UICollection;
+import com.migestion.swing.navigation.LinkOpenDialog;
+import com.migestion.swing.navigation.exception.LinkException;
 import com.migestion.swing.navigation.interfaces.ILinkWindowFindObject;
 import com.migestion.swing.search.criteria.UICriteria;
 import com.migestion.swing.view.exceptions.ViewException;
@@ -43,9 +52,10 @@ import com.migestion.swing.view.renderers.ElementTableRenderer;
  * @author Bernardo Iribarne.
  *
  */
-public abstract class DialogFindObject extends DialogOkCancel implements ILinkWindowFindObject,
+public abstract class DialogFindObject<T> extends DialogOkCancel implements ILinkWindowFindObject,
 																		 TableModelListener,
-																		 ListSelectionListener{
+																		 ListSelectionListener,
+																		 IContextListener<T>{
 
 	//objeto encontrado.
 	private Object objectFinded;
@@ -84,6 +94,8 @@ public abstract class DialogFindObject extends DialogOkCancel implements ILinkWi
 	JButton btnMinusRow;
 	JButton btnAddRow;
 	
+	private LinkOpenDialog linkAdd;
+	
 	//------------------
 	// CONSTRUCTORES
 	//------------------
@@ -95,6 +107,20 @@ public abstract class DialogFindObject extends DialogOkCancel implements ILinkWi
 	public DialogFindObject(String title) {
 		super(title);
 		this.rowCount = 10;
+		this.linkAdd = getLinkAdd();
+		// Close the dialog when Esc is pressed
+        String agregarName = "agregar";
+        InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0), agregarName);
+        ActionMap actionMap = getRootPane().getActionMap();
+        actionMap.put(agregarName, new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                doAdd();
+                
+            }
+			
+        });
+		
 	}
 	
 	/**
@@ -105,6 +131,20 @@ public abstract class DialogFindObject extends DialogOkCancel implements ILinkWi
 	public DialogFindObject(String title, String pathImage) {
 		super(title, pathImage);
 		this.rowCount = 10;
+		this.linkAdd = getLinkAdd();
+		// Close the dialog when Esc is pressed
+        String agregarName = "agregar";
+        InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0), agregarName);
+        ActionMap actionMap = getRootPane().getActionMap();
+        actionMap.put(agregarName, new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                doAdd();
+                
+            }
+			
+        });
+		
 	}
 	
 	/**
@@ -178,6 +218,10 @@ public abstract class DialogFindObject extends DialogOkCancel implements ILinkWi
 		//panel para visualizar la tabla.
 		JScrollPane scroll = getScrollWithTable(); 
 		panelMain.add(scroll, BorderLayout.CENTER);
+
+		
+		panelMain.add(getFooter(), BorderLayout.SOUTH);
+		
 		
 		//seteamos el tama�o
 		double height = header.getPreferredSize().getHeight();
@@ -188,6 +232,15 @@ public abstract class DialogFindObject extends DialogOkCancel implements ILinkWi
 		return panelMain;
 	}
 	
+	private Component getFooter() {
+		
+		if( getLinkAdd() != null )
+		
+			return new JLabel("F6 - agregar");
+		else
+			return new JLabel("");	
+	}
+
 	/*
 	 * retorna el scroll con la tabla que contiene
 	 * la colecci�n a mostrar.
@@ -676,6 +729,11 @@ public abstract class DialogFindObject extends DialogOkCancel implements ILinkWi
 	 */
 	protected abstract UICollection getUICollectionDefault();
 
+	/**
+	 * retorna el controlador para agregar un elemento.
+	 * @return
+	 */
+	protected abstract LinkOpenDialog getLinkAdd();
 	
 	
 	/*
@@ -689,4 +747,46 @@ public abstract class DialogFindObject extends DialogOkCancel implements ILinkWi
 		this.labelHeader.setText(getTitle());
 		super.doCancel();
 	}
+	
+	/**
+	 * se abre el di�logo centrado en la pantalla.
+	 */
+	public void open() {
+		doSearch();
+		super.open();
+	}
+
+
+	protected void doAdd() {
+		
+		if( this.linkAdd != null)
+			try {
+				
+				this.linkAdd.doExecute();
+				
+			} catch (LinkException e) {
+				
+				DialogMessage.showErrorMessage(this.linkAdd.getDescription(),e.getMessage());
+			}
+	}
+
+	public void objectCreated(T objectCreated) {
+		if( this.linkAdd != null){
+			objectFinded = objectCreated;
+			doOk();	
+		}
+		
+		
+	}
+
+
+	public void objectDeleted(T objectDeleted) {
+		doSearch();
+	}
+
+
+	public void objectUpdated(T objectUpdated) {
+		doSearch();
+	}
+
 }
