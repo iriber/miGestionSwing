@@ -31,7 +31,7 @@ public abstract class InputValidator {
 	private String message;
 	
 	public InputValidator(){
-		this.marca = "*";
+		this.marca = " *";
 		this.message = "";
 	}
 	
@@ -39,6 +39,7 @@ public abstract class InputValidator {
 		this.marca = marca;
 	}
 
+	
 	public void put(JLabel label, JComponent component, InputInspector inspector){
 		inputs.put(label, component);
 		inspectors.put(component, inspector);
@@ -82,23 +83,24 @@ public abstract class InputValidator {
 		Iterator<JLabel> it = inputs.keySet().iterator();
 		while (it.hasNext()) {
 			JLabel label = (JLabel) it.next();
-			label.setText(label.getText() + " " + this.marca);
+			label.setText(label.getText() + this.marca);
 		}
 	}
 	
 	public void reset(){
 	
-		/*
-		//le quitamos la marca.
-		int marcaLength =  this.marca.length()+1;
-		
 		Iterator<JLabel> it = inputs.keySet().iterator();
 		while (it.hasNext()) {
 			JLabel label = (JLabel) it.next();
-			if(marcaLength>4)
-				label.setText(label.getText().substring(0,marcaLength-4 ));
+			
+			//le quitamos la marca.
+			int marcaLength =  this.marca.length();
+			int textLength = label.getText().length() - marcaLength;
+			if (textLength > 0)
+				label.setText(label.getText().substring(0,textLength ));
 		}
-		*/
+		
+		
 	}
 	
 	public void setError(JLabel label, JComponent component, InputInspector inspector){
@@ -114,11 +116,7 @@ public abstract class InputValidator {
 		label.setBackground( backgroundLabels.get(label) );
 		inspector.setColor( backgroundInputs.get(component), component);
 		
-		//le quitamos la marca.
-		int marcaLength =  this.marca.length();
-		int textLength = label.getText().length() - marcaLength;
-//		if (textLength > 1)
-//			label.setText(label.getText().substring(0,textLength-1 ));
+		
 	}
 
 	/**
