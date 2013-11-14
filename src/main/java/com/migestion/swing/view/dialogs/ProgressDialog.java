@@ -3,6 +3,7 @@ package com.migestion.swing.view.dialogs;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -75,9 +76,10 @@ public class ProgressDialog extends JDialog {
 
     }
 
-    public static void showProgress(Component parent, SwingWorker worker, String title,String message, String submessage) {
+    public static void showProgress(Component parent, SwingWorker worker, String title,String message, String submessage, Image icon) {
 
         ProgressDialog dialog = new ProgressDialog(parent, worker, title, message, submessage);
+        dialog.setIconImage( icon );
         dialog.setLocationRelativeTo(parent);
         dialog.setVisible(true);
 

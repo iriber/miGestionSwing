@@ -11,14 +11,19 @@ import java.awt.Frame;
 import java.awt.LayoutManager;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 import com.migestion.swing.factories.PropertyInputFactory;
 import com.migestion.swing.i18n.buttons.ButtonImagesBundle;
@@ -85,6 +90,20 @@ public abstract class DialogOkCancel extends JDialog implements IDialogWithInput
 	 * se inicializa el di�logo. (t�tulo, size, botones, etc).
 	 */
 	protected void initialize(){
+		
+        // Close the dialog when Esc is pressed
+        String cancelName = "cancel";
+        InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), cancelName);
+        ActionMap actionMap = getRootPane().getActionMap();
+        actionMap.put(cancelName, new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                doCancel();
+                
+            }
+        });
+
+		
 		//inicializamos las properties input
 		propertiesInput = new PropertyInputCollection();
 		
@@ -271,7 +290,7 @@ public abstract class DialogOkCancel extends JDialog implements IDialogWithInput
 		
 		//bot�n OK
 		btnOk = new JButton(ButtonLabelsBundle.btn_Ok);
-		btnOk.setFont(new Font("Dialog", Font.PLAIN, 10));
+//		btnOk.setFont(new Font("Dialog", Font.PLAIN, 10));
 		btnOk.setMinimumSize(new Dimension(100, 23));
 		btnOk.setToolTipText(ButtonLabelsBundle.btn_Ok_ToolTipText);
 		
@@ -288,7 +307,7 @@ public abstract class DialogOkCancel extends JDialog implements IDialogWithInput
 
 		//bot�n Cancel
 		btnCancel = new JButton(ButtonLabelsBundle.btn_Cancel);
-		btnCancel.setFont(new Font("Dialog", Font.PLAIN, 10));
+//		btnCancel.setFont(new Font("Dialog", Font.PLAIN, 10));
 		btnCancel.setMinimumSize(new Dimension(110, 23));
 		btnCancel.setToolTipText(ButtonLabelsBundle.btn_Cancel_ToolTipText);
 		btnCancel.setIcon(new ImageIcon(ButtonImagesBundle.btn_Cancel));
@@ -364,4 +383,7 @@ public abstract class DialogOkCancel extends JDialog implements IDialogWithInput
 	public PropertyInputCollection getPropertyInputs() {
 		return this.propertiesInput;
 	}
+	
+	
+	
 }
